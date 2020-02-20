@@ -108,7 +108,7 @@ app.get("/articles", function(req, res) {
     // and update it's "note" property with the _id of the new note
    db.Comment.create(req.body)
     .then(function(dbComment){
-      return db.Article.findOneAndUpdate({_id:req.params.id}, { Comment: dbComment._id}, {new: true});
+      return db.Article.findOneAndUpdate({_id:req.params.id}, { comment: dbComment._id}, {new: true});
     })
     .then(function(dbArticle){
       res.json(dbArticle);

@@ -4,27 +4,33 @@
     <meta charset="UTF-8">
     <title>Scraping With Mongoose</title>
     <style>
-      body { background-color: #F2F6D0 }
+      body { background-color:rgb(233, 230, 230) }
       #wrapper {
+        font-family: 'Courier New', Courier, monospace;
         width: 960px;
         margin-left: auto;
         margin-right: auto;
         padding-top: 5%;
       }
+      h1{
+        text-align: center;
+        font-size: 60px;
+        font-family: 'Courier New', Courier, monospace;
+      }
+      h2{
+        text-align: center;
+      }
       #articles {
-        display: inline-block;
-        overflow: auto;
-        width: 60%;
-        height: 700px;
+        padding-top: 15px;
+       font-weight: bolder;
       }
-      #notes {
-        float: right;
-        width: 30%;
-      }
+      /* #notes {
+       
+      } */
       textarea, input {
         display: block;
         width: 100%;
-        background-color: #FCF5C7;
+        background-color: rgb(248, 248, 246);
       }
       input {
         height: 36px;
@@ -39,9 +45,10 @@
   <body>
     <div id="wrapper">
       <h1>Important stories</h1>
-      <h2><i> Most important news of the day.</i></h2>
+      <h2><b> Most important news of the day.</b></h2>
       <div id="articles"></div>
-      <div id="notes"></div>
+      <div id="comments">
+      </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="/app.js"></script>

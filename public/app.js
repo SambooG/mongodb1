@@ -1,6 +1,7 @@
 // Grab the articles as a json
 console.log("APP.JS IS LOADED");
 
+
 $.getJSON("/articles", function (data) {
     // For each one
     console.log("DATA: ", data);
@@ -25,7 +26,7 @@ $.getJSON("/articles", function (data) {
   // Whenever someone clicks a p tag
   $(document).on("click", "p", function() {
     // Empty the notes from the note section
-    $("#comment").empty();
+    $("#Comment").empty();
     // Save the id from the p tag
     const thisId = $(this).attr("data-id");
   
@@ -38,13 +39,13 @@ $.getJSON("/articles", function (data) {
       .then(function(data) {
         console.log(data);
         // The title of the article
-        $("#comment").append("<h2>" + data.title + "</h2>");
+        $("#articles").append("<h2>" + data.title + "</h2>");
         // An input to enter a new title
-        $("#comment").append("<input id='titleinput' name='title' >");
+        $("#articles").append("<input id='titleinput'name='title' >");
         // A textarea to add a new note body
-        $("#comment").append("<textarea id='bodyinput' name='body'></textarea>");
+        $("#articles").append("<textarea id='bodyinput' name='body'></textarea>");
         // A button to submit a new note, with the id of the article saved to it
-        $("#comment").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+        $("#articles").append("<button data-id=" + data.title + "id='savecomment'>Save Comment</button>");
   
         // If there's a note in the article
         if (data.comment) {
@@ -53,8 +54,9 @@ $.getJSON("/articles", function (data) {
           // Place the body of the note in the body textarea
           $("#bodyinput").val(data.comment.body);
         }
+        console.log("comment", data.comment);
       });
-  });
+    });
   
   // When you click the savenote button
   $(document).on("click", "#savecomment", function() {
@@ -77,7 +79,7 @@ $.getJSON("/articles", function (data) {
         // Log the response
         console.log(data);
         // Empty the notes section
-        $("#comment").empty();
+        $("#Comment").empty();
       });
   
     // Also, remove the values entered in the input and textarea for note entry
