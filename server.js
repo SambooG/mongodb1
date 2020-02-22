@@ -72,6 +72,7 @@ app.get("/scrape", function(req, res) {
 app.get("/articles", function(req, res) {
     // TODO: Finish the route so it grabs all of the articles
     db.Article.find({})
+    .populate("comments")
       .then(function(dbArticle) {
         // If any Books are found, send them to the client
         res.json(dbArticle);
@@ -90,7 +91,7 @@ app.get("/articles", function(req, res) {
     // and run the populate method with "note",
     // then responds with the article with the note included
     db.Article.findOne({_id: req.params.id })
-    .populate("Comment")
+    .populate("comments")
     .then(function(dbArticle){
       res.json(dbArticle);
     })
@@ -108,7 +109,7 @@ app.get("/articles", function(req, res) {
     // and update it's "note" property with the _id of the new note
    db.Comment.create(req.body)
     .then(function(dbComment){
-      return db.Article.findOneAndUpdate({_id:req.params.id}, { comment: dbComment._id}, {new: true});
+      return db.Article.findOneAndUpdate({_id:req.params.id}, { comments: dbComment._id}, {new: true});
     })
     .then(function(dbArticle){
       res.json(dbArticle);
@@ -118,6 +119,21 @@ app.get("/articles", function(req, res) {
     });
   });
   
+
+    // Route for deleting a comment on an Article by id,
+    app.delete("/articles/:id", function(req, res) {
+      const { commentId } = req.body;
+      console.log("MY INFORMATION: ", req.params.id, commentId);
+      
+
+      db.Article.findOne({_id: req.params.id })
+      .then(function(dbArticle){
+        console.log("article to handle!: ", dbArticle);
+        dbArticle.comments.pull(commentId);
+        dbArticle.save();
+      })
+    });
+    
 
   
 app.get('/', (req, res) => res.sendFile(__dirname + "/views/index.html"));
