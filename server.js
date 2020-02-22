@@ -125,13 +125,6 @@ app.get("/articles", function(req, res) {
       const { commentId } = req.body;
       console.log("MY INFORMATION: ", req.params.id, commentId);
       
-
-      db.Article.findOne({_id: req.params.id })
-      .then(function(dbArticle){
-        console.log("article to handle!: ", dbArticle);
-        dbArticle.comments.pull(commentId);
-        dbArticle.save();
-      })
     });
     
 
@@ -184,3 +177,12 @@ app.get('/', (req, res) => res.sendFile(__dirname + "/views/index.html"));
          *  </div>
          * </article>
          */
+
+
+
+        // db.Article.findOne({_id: req.params.id })
+        // .then(function(dbArticle){
+        //   console.log("article to handle!: ", dbArticle);
+        //   dbArticle.comments.pull(commentId);
+        //   dbArticle.save();
+        // })
