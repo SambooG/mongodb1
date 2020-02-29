@@ -20,6 +20,18 @@ $.getJSON("/articles", function (data) {
             <br />
             <a href="${data[i].link}">${data[i].link}</a>
           </p>
+          <div class="comments">
+          ${
+            data[i].comments.map((comment) => {
+              return `
+                <div class="individualComment" data-article='${data[i]._id}' data-id='${comment._id}'>
+                  <p>${comment.title}</p>
+                  <p>${comment.body}</p>
+                </div>
+              `
+            })
+          }
+          </div>
         </div>
       `);
     }
@@ -94,62 +106,28 @@ $.getJSON("/articles", function (data) {
   
 
 
+  // Whenever someone clicks a comment, delete it
+  $(document).on("click", ".individualComment", function() {
+    // Empty the notes from the note section
+    const commentId = $(this).attr("data-id");
+    const articleId = $(this).attr("data-article");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // <div class="comments">
-  // ${
-  //   data[i].comments.map((comment) => {
-  //     return `
-  //       <div class="individualComment" data-article='${data[i]._id}' data-id='${comment._id}'>
-  //         <p>${comment.title}</p>
-  //         <p>${comment.body}</p>
-  //       </div>
-  //     `
-  //   })
-  // }
-  // </div>
-
-
-
-  // // Whenever someone clicks a comment, delete it
-  // $(document).on("click", ".individualComment", function() {
-  //   // Empty the notes from the note section
-  //   const commentId = $(this).attr("data-id");
-  //   const articleId = $(this).attr("data-article");
-
-  //    // Run a POST request to change the note, using what's entered in the inputs
-  //    $.ajax({
-  //       method: "DELETE",
-  //       url: "/articles/" + articleId,
-  //       data: {
-  //         commentId: commentId
-  //       }
-  //     })
-  //     // With that done
-  //     .then(function(data) {
-  //       // Log the response
-  //       console.log(data);
-  //       console.log("comment", data.comment)
-  //       // Empty the notes section
-  //       $("#Comment").empty();
-  //     });
+     // Run a POST request to change the note, using what's entered in the inputs
+     $.ajax({
+        method: "DELETE",
+        url: "/articles/" + articleId,
+        data: {
+          commentId: commentId
+        }
+      })
+      // With that done
+      .then(function(data) {
+        // Log the response
+        console.log(data);
+        console.log("comment", data.comment)
+        // Empty the notes section
+        $("#Comment").empty();
+      });
   
-  // });
+  });
   
