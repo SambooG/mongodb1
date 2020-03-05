@@ -24,7 +24,7 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraped";
+const PORT = process.env.MONGODB_URI || "mongodb://localhost/scraped";
 // Connect to the Mongo DB
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
