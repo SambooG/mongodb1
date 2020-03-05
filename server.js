@@ -11,7 +11,7 @@ const cheerio = require("cheerio");
 // Require all models
 let db = require("./models");
 
-const PORT =process.env (MONGODB_URI)|| 3000  ;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 // Initialize Express
 const app = express();
