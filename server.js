@@ -11,7 +11,8 @@ const cheerio = require("cheerio");
 // Require all models
 let db = require("./models");
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+// mongoose.connect(MONGODB_URI);
 
 // Initialize Express
 const app = express();
@@ -23,8 +24,9 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraped";
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/scraped", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 
 app.get("/scrape", function(req, res) {
