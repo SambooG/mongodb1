@@ -24,7 +24,7 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-const PORT = process.env.PORT || "localhost:8080";
+const PORT = process.env.PORT || 8080;
 // Connect to the Mongo DB
 const MONGO_URL=process.env.MONGODB_URI ||"mongodb://localhost/scraped";
 mongoose.connect(MONGO_URL, { useNewUrlParser: true });
@@ -132,7 +132,7 @@ app.get("/articles", function(req, res) {
     
 
   
-app.get('/', (req, res) => res.sendFile(__dirname + "/views/index.html"));
+    app.get('/', (req, res) => res.sendFile(path.join(__dirname, "./views/index.html")));
 
   // Start the server
   app.listen(PORT, function() {
