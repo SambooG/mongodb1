@@ -26,7 +26,7 @@ app.use(express.static("public"));
 
 const PORT = process.env.PORT || "localhost:8080";
 // Connect to the Mongo DB
-const Mongo_URL=process.env.MONGODB_URI ||"mongodb://localhost/scraped";
+const MONGO_URL=process.env.MONGODB_URI ||"mongodb://localhost/scraped";
 mongoose.connect(MONGO_URL, { useNewUrlParser: true });
 
 
